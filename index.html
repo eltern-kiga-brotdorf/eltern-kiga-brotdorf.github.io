@@ -1,95 +1,337 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elternausschuss Kindergarten St. Marien Brotdorf</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: url('https://images.unsplash.com/photo-1564429238817-393bd4286b2d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&fit=crop&w=1200&q=80') no-repeat center top / cover fixed;
+            background-blend-mode: lighten;
+            color: #333;
+        }
+
         .jumbotron {
-            background-image: url('https://images.unsplash.com/photo-1564429238817-393bd4286b2d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&fit=crop&w=1200&q=80');
-            background-size: cover;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            color: #333;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 0 0 2rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        .event-card {
-            transition: transform 0.3s;
+
+        h1,
+        h2 {
+            font-weight: 700;
         }
-        .event-card:hover {
-            transform: scale(1.05);
+
+        section {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-pastell {
+            background-color: #0077b6;
+            color: #ffffff;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-pastell:hover {
+            background-color: #005f99;
+            color: #ffffff;
+        }
+
+        footer {
+            background: linear-gradient(to right, #e0e0e0, #bdbdbd);
+            color: #424242;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        nav.navbar {
+            background: linear-gradient(to right, #e0e0e0, #bdbdbd);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #424242;
+        }
+
+        .nav-link {
+            color: #424242 !important;
+        }
+
+        .nav-link:hover {
+            color: #212121 !important;
+        }
+
+        .bi {
+            margin-right: 0.4rem;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f5f5f5;
+            color: #424242;
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <!-- "Passwortschutz" -->
+    <div id="pw-protect" style="position:fixed;z-index:9999;inset:0;background:rgba(255,255,255,1);display:flex;align-items:center;justify-content:center;">
+    <form id="pw-form" style="background:#fff;border-radius:1rem;box-shadow:0 4px 24px #0077b633;padding:2rem;min-width:300px;">
+        <h2 style="color:#0077b6;">Zugang geschützt</h2>
+        <p>Bitte Passwort eingeben:</p>
+        <input type="password" id="pw-input" class="form-control mb-3" placeholder="Passwort" autofocus>
+        <button type="submit" class="btn btn-pastell w-100">Einloggen</button>
+        <div id="pw-error" style="color:#d32f2f;margin-top:1rem;display:none;">Falsches Passwort!</div>
+    </form>
+    </div>
+    <script>
+    const CORRECT_PW = "Marder";
+    document.getElementById('pw-form').onsubmit = function(e) {
+        e.preventDefault();
+        if(document.getElementById('pw-input').value === CORRECT_PW) {
+        document.getElementById('pw-protect').style.display = 'none';
+        } else {
+        document.getElementById('pw-error').style.display = 'block';
+        }
+    };
+    </script>
+
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">Elternausschuss KiGa Brotdorf</a>
+            <a class="navbar-brand" href="#"><i class="bi bi-balloon-heart-fill"></i> Elternausschuss KiGa Brotdorf</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about">Über uns</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#stayinformed">Informationen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header class="jumbotron jumbotron-fluid text-center py-5">
-        <div class="container">
-            <h1 class="display-4">Willkommen auf der Homepage des Elternausschusses</h1>
-            <p class="lead">Für die Interessen unserer Kinder!</p>
-        </div>
+    <header class="jumbotron">
+        <h1 class="display-4">Elternausschuss des Kindergarten St. Marien Brotdorf</h1>
+        <p class="lead">Für die Interessen unserer Kinder!</p>
     </header>
 
-    <main class="container my-5">
-        <section id="about" class="mb-5">
-            <h2 class="text-center mb-4">Über uns</h2>
-            <p>Wir sind: <span style="color: blue;">unsere Vornamen</span></p>
-            <p>Unser Auftrag: die Erziehungsarbeit in der Kindertageseinrichtung zu unterstützen und die Zusammenarbeit zwischen dieser, Erziehungsberechtigten und Trägern zu fördern.</p>
+    <main class="container">
+        <!-- "Über uns"-Bereich -->
+        <section id="about">
+            <h2><i class="bi bi-people-fill"></i> Über uns</h2>
+            <p>
+                Der Elternausschuss ist ein wichtiges Bindeglied zwischen Eltern, Kita-Team und Träger. Er vertritt die
+                Interessen der Familien gegenüber der Einrichtung und bringt sich aktiv in das Kita-Geschehen ein.
+            </p>
+            <p>Wer euch aktuell im Elternausschuss vertritt, könnt ihr in der Eltern-App unter Menü (☰) > "Unsere KiTa" einsehen.</p>
+            <p>
+                In regelmäßigen Sitzungen besprechen wir aktuelle Themen, geben Rückmeldung zur pädagogischen Arbeit,
+                planen gemeinsam mit dem Team Aktivitäten und stärken den Austausch unter den Eltern. Auch Anregungen,
+                Wünsche oder Sorgen aus der Elternschaft können über den Ausschuss eingebracht werden.
+            </p>
         </section>
 
-        <section id="events" class="mb-5">
-            <h2 class="text-center mb-4">Veranstaltungen</h2>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="card event-card">
-                        <div class="card-body">
-                            <h5 class="card-title">St. Martin</h5>
-                            <p class="card-text">Wir freuen uns auf einen gemeinsamen Laternenumzug und das Martinsfeuer, sowie natürlich die Brezeln!</p>
-                            <p class="card-text"><small class="text-muted">8. November 2024</small></p>
+        <!-- FAQ-Bereich -->
+        <section id="faq" class="mb-5">
+            <h2><i class="bi bi-question-circle-fill"></i>FAQ</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq1-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse1-content">
+                            Wie kann ich mich in den Elternausschuss wählen lassen?
+                        </button>
+                    </h2>
+                    <div id="collapse1-content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Die Wahlperiode beträgt zwei Jahre. Die nächste Wahl findet im Herbst 2026 statt. Über die
+                            Eltern-App wird dann ein Aufruf verteilt, sich zur Wahl aufstellen zu lassen.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card event-card">
-                        <div class="card-body">
-                            <h5 class="card-title"><span style="color: blue;">to be done</span></h5>
-                            <p class="card-text"><span style="color: blue;">to be done</span></p>
-                            <p class="card-text"><small class="text-muted"><span style="color: blue;">to be done</span></small></p>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq2-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse2-content">
+                            Gibt es eine rechtliche Grundlage für den Elternausschuss?
+                        </button>
+                    </h2>
+                    <div id="collapse2-content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Ja, die rechtliche Grundlage ist die Verordnung über die Beteiligung der
+                            Erziehungsberechtigten in Kindertageseinrichtungen (Elternbeteiligungs-VO) vom 15. März
+                            2022. Diese regelt die Mitbestimmung und Mitwirkung der Eltern in den Einrichtungen.
+                            <p>Hier ein Auszug: "Der Elternausschuss hat die Aufgabe, die Erziehungsarbeit in der
+                                Kindertageseinrichtung zu unterstützen und die Zusammenarbeit zwischen dieser,
+                                Erziehungsberechtigten und Trägern zu fördern."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq3-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse3-content">
+                            Wie oft habt ihr Sitzungen, und wie erfahre ich, was besprochen wurde?
+                        </button>
+                    </h2>
+                    <div id="collapse3-content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Unsere Sitzungen finden mindestens einmal im Quartal statt. Die Tagesordnung wird vorab über
+                            die Eltern-App verteilt. Die Kitaleitung und stellvertretende Leitung nehmen an den
+                            Sitzungen teil. Es wird ein Protokoll erstellt, das anschließend ebenfalls über die
+                            Eltern-App verteilt wird.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq4-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse4-content">
+                            Wozu dient diese Homepage?
+                        </button>
+                    </h2>
+                    <div id="collapse4-content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Diese Seite dient als digitale Version des bisherigen Flyers – mit dem Vorteil, dass sie
+                            immer aktuell gehalten wird. Für aktuelle Informationen (z. B. Veranstaltungen, Themen in
+                            Sitzungen, kurzfristige Hinweise) nutzen wir die Eltern-App.
+                            Vor allem dient diese Seite dazu, die Kontaktmöglichkeiten jederzeit und einfach zugänglich
+                            zu machen.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq5-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse5-content">
+                            Gibt es weitere Informationskanäle außer der Eltern-App?
+                        </button>
+                    </h2>
+                    <div id="collapse5-content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Ja, es gibt eine WhatsApp-Gruppe, über die informell kommuniziert wird. Für essenzielle
+                            Informationen nutzen wir jedoch ausschließlich die Eltern-App. Wer der WhatsApp-Gruppe
+                            beitreten möchte, kann sich an ein Mitglied des Elternausschusses wenden oder an den
+                            Verteiler schreiben.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse4">
+                            Gibt es Infos zur Auslagerung?
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Seit Dezember 2023 befindet sich die Kita in ausgelagerten Räumlichkeiten in Merzig. Für
+                            Eltern, die ihre Kinder nicht selbst dorthin bringen können, wurde ein Busshuttle
+                            eingerichtet. Bei Fragen dazu helfen wir gerne weiter. Ansonsten sind wir bemüht, euch über
+                            die Eltern-App über den Stand zur Rückkehr nach Brotdorf auf dem Laufenden zu halten.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse5">
+                            Was ist der Unterschied zwischen Elternausschuss und Förderverein?
+                        </button>
+                    </h2>
+                    <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Der Elternausschuss ist das gewählte Gremium der Elternschaft und vertritt die Interessen
+                                der Eltern gegenüber der Kita-Leitung und dem Träger. Er bringt sich beratend in
+                                pädagogische und organisatorische Fragen ein, fördert den Austausch zwischen Eltern und
+                                Erzieherteam und wirkt bei wichtigen Entscheidungen mit.
+                            </p>
+                            <p>Im Unterschied dazu konzentriert sich der Förderverein "Bro Kita" auf die materielle und
+                                finanzielle Unterstützung der Kita. Während der Elternausschuss also vor allem
+                                Mitbestimmungs- und Beratungsaufgaben hat, sammelt der Förderverein Spenden, organisiert
+                                Veranstaltungen und stellt finanzielle Mittel bereit. Mehr Informationen gibt es auf der
+                                Homepage: <a href="https://bro-kita.info" target="_blank">bro-kita.info</a>
+                            </p>
+                            <p>Beide Gremien arbeiten also zusammen, haben aber unterschiedliche Schwerpunkte und
+                                Aufgabenbereiche.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="stayinformed" class="mb-5">
-            <h2 class="text-center mb-4">Bleibt informiert!</h2>
-            <p>Bitte tragt euch in folgenden Email-Verteiler ein, um aktuelle Infos von uns zu erhalten: <span style="color: blue;">Link zum Emailverteiler</span> .</p>
-        </section>
-
-        <section id="contact" class="mb-5">
-            <h2 class="text-center mb-4">Kontakt</h2>
-            <p>Sprecht uns persönlich an, oder schreibt uns eine Email an <span style="color: blue;">unsere Emailadresse</span></p>
+        <!-- Kontaktbereich -->
+        <section id="contact">
+            <h2><i class="bi bi-envelope-fill"></i> Kontakt</h2>
+            <p>Bei Anliegen sprecht uns gerne persönlich im Kindergarten an oder kontaktiert uns telefonisch bzw. per
+                E-Mail.</p>
+            <p>Alternativ könnt ihr auch an unseren Verteiler schreiben, der alle Mitglieder des Elternausschusses
+                erreicht:</p>
+            <a class="btn btn-pastell mt-2 mb-2" href="mailto:kontakt@elternvertretung-kitabrotdorf.de">
+                <i class="bi bi-send-fill"></i> E-Mail an unseren Verteiler schreiben
+            </a>
+            <p class="mt-2">Wir freuen uns über euer Feedback und eure Anregungen!</p>
+            <div class="accordion mt-4" id="legalAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="legalHeading">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#legalCollapse">
+                            <i class="bi bi-info-circle-fill"></i> Impressum / Rechtliches
+                        </button>
+                    </h2>
+                    <div id="legalCollapse" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
+                        <div class="accordion-body">
+                            <p>Da wir als Elternausschuss keine geschäftlichen Interessen verfolgen, unterliegen wir für
+                                diese Homepage nicht der Impressumspflicht gemäß §5 DDG. Nichtsdestotrotz können Sie uns
+                                wie folgt kontaktieren:
+                            </p>
+                            <p>
+                                Maximilian Naumann<br>
+                                erreichbar über<br>
+                                Kath. Kita St. Marien Brotdorf<br>
+                                Triererstr. 148, Gebäude B<br>
+                                66663 Merzig<br>
+                                Email: kontakt@elternvertretung-kitabrotdorf.de
+                            </p>
+                            <h5>Haftung</h5>
+                            <p>Wir sind bemüht, die Informationen auf dieser Webseite korrekt und aktuell zu halten.
+                                Trotzdem können Fehler und Unklarheiten nicht ausgeschlossen werden. Wir übernehmen
+                                daher keine Gewähr für die Richtigkeit, Vollständigkeit oder Qualität der
+                                bereitgestellten Inhalte.</p>
+                            <h5>Links</h5>
+                            <p>Diese Webseite enthält Links zu externen Webseiten Dritter. Auf deren Inhalte haben wir
+                                keinen Einfluss. Für diese Inhalte ist stets der jeweilige Anbieter verantwortlich. Bei
+                                Bekanntwerden von Rechtsverletzungen werden wir solche Links umgehend entfernen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="bg-light text-center py-3">
-        <p>&copy; 2024 Elternausschuss Kindergarten St. Marien Brotdorf. All rights reserved.</p>
+    <footer>
+        &copy; 2024 Elternausschuss Kindergarten St. Marien Brotdorf - Letzte Aktualisierung: 06.06.2025
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
